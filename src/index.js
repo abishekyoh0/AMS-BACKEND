@@ -1,7 +1,7 @@
 import express from "express"
-import { connectDB } from "./config/db"
+import { connectDB } from "../src/config/db.js"
 import cors from "cors"
-import Route from "./routes"
+import Route from "../src/routes/index.js"
 
 connectDB()
 const PORT = process.env.PORT || 5000
@@ -14,3 +14,5 @@ app.use("/api", Route)
 app.listen(PORT, () => {
     console.log(`Server is running on PORT: ${PORT}`)
 })
+
+
