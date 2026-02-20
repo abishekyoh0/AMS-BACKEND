@@ -46,7 +46,21 @@ const residentSchema = new mongoose.Schema(
     move_out_date: {
       type: Date
     },
+    isVerified:{
+       type: Boolean,
+       default: false
+    },
 
+     status: {
+      type: String,
+      enum: ["Pending", "Approved", "Rejected"],
+      default: "Pending"
+    },
+
+     rejection_reason: {
+      type: String,
+      default: ""
+    },
     isActive: {
       type: Boolean,
       default: true

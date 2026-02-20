@@ -80,3 +80,29 @@ export const deleteResident = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+
+export const registerResident = async (req, res) => {
+  const resident = await Resident.create(req.body);
+
+  res.json({
+    success: true,
+    message: "Registration submitted. Waiting for OTP verification",
+    data: resident
+  });
+};
+
+export const approveResident = async (req, res) => {
+  const resident = await Resident.findByIdAndUpdate(
+    req.params.id,
+    {
+      status: "Approved",
+      isActive: true
+    },
+    { returnDocument: "after" }
+  );
+
+  res.json({ success: true, data: resident });
+};
+
+
+
