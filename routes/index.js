@@ -8,19 +8,25 @@ import userRoutes from "../routes/UserManagement/usersRoute.js";
 import roleRoutes from "../routes/UserManagement/role.route.js";
 import { adminLogin } from "../controllers/usermanagement/admincontroll.js";
 import tenantRoutes from "../routes/apartmentmanagement/tenants.js"
+import vehicleRoutes from "../routes/vehicle/vehicle.js"
+import parkingSlotRoutes from "../routes/vehicle/parking.js"
+import visitorRoutes from "../routes/visitor/visitor.js"
 
 
 const router = express.Router();
 
-router.use("/blocks", blockRoutes);
-router.use("/floors", floorRoutes);
-router.use("/flats", flatRoutes);
+router.use("/blocks", blockRoutes)
+router.use("/floors", floorRoutes)
+router.use("/flats", flatRoutes)
 router.use("/families", familyRoutes)
-router.use("/residents", residentRoutes);
-router.use("/tenants", tenantRoutes);
+router.use("/residents", residentRoutes)
+router.use("/tenants", tenantRoutes)
 router.use("/user", userRoutes)
 router.use("/roles", roleRoutes)
 router.post("/admin-login", adminLogin)
+router.use("/vehicles", vehicleRoutes)
+router.use("/parkingSlots", parkingSlotRoutes)
+router.use("/visitors", visitorRoutes);
 
 
 export default router;
