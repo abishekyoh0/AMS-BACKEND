@@ -11,6 +11,7 @@ import tenantRoutes from "../routes/apartmentmanagement/tenants.js"
 import vehicleRoutes from "../routes/vehicle/vehicle.js"
 import parkingSlotRoutes from "../routes/vehicle/parking.js"
 import visitorRoutes from "../routes/visitor/visitor.js"
+import invoiceRoutes from "../routes/invoice/invoice.js"
 
 
 const router = express.Router();
@@ -27,6 +28,7 @@ router.post("/admin-login", adminLogin)
 router.use("/vehicles", vehicleRoutes)
 router.use("/parkingSlots", parkingSlotRoutes)
 router.use("/visitors", visitorRoutes);
+router.use("/invoices", invoiceRoutes);
 
 
 export default router;
