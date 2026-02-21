@@ -17,7 +17,7 @@ const residentSchema = new mongoose.Schema(
     resident_type: {
       type: String,
       enum: ["Owner", "Tenant"],
-      required: [true, "Resident type is required"]
+      required: true
     },
 
     id_proof: {
@@ -40,30 +40,41 @@ const residentSchema = new mongoose.Schema(
 
     move_in_date: {
       type: Date,
-      required: [true, "Move-in date is required"]
+      required: true
     },
 
-    move_out_date: {
-      type: Date
-    },
-    isVerified:{
-       type: Boolean,
-       default: false
+    move_out_date: Date,
+
+    isVerified: {
+      type: Boolean,
+      default: false
     },
 
-     status: {
+    status: {
       type: String,
       enum: ["Pending", "Approved", "Rejected"],
       default: "Pending"
     },
 
-     rejection_reason: {
+    rejection_reason: {
       type: String,
       default: ""
     },
+
+    approved_by: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      default: null
+    },
+
+    approved_at: {
+      type: Date,
+      default: null
+    },
+
     isActive: {
       type: Boolean,
-      default: true
+      default: false
     },
 
     isDeleted: {
@@ -73,5 +84,7 @@ const residentSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+residentSchema.index({ user_id: 1 }, { unique: true });
 
 export default mongoose.model("Resident", residentSchema);

@@ -3,21 +3,20 @@ import userSchema from "../../models/users/userSchema.js";
 
 export const createUser = async (req, res) => {
     try {
-        const { role_id, full_name, email, mobile, status } = req.body;
+        const { role_id, full_name, email, mobile } = req.body;
         const role = await roleSchema.findById(role_id);
-        if (!role) {
+        if (!role)
             return res.status(404).json({ message: "Role not found" });
-        }
         const user = await userSchema.create({
             role_id,
             full_name,
             email,
             mobile,
-            status,
+            status: "Pending"
         });
         res.status(201).json({
-            message: "User created successfully",
-            user,
+            message: "User registered. Waiting for approval",
+            user
         });
     } catch (err) {
         res.status(500).json({ message: err.message });
@@ -94,7 +93,6 @@ export const deleteUser = async (req, res) => {
     });
 };
 
-
 export const reactivateUser = async (req, res) => {
     const { id } = req.params;
 
@@ -113,3 +111,7 @@ export const reactivateUser = async (req, res) => {
         message: "User reactivated successfully",
     });
 };
+
+export const loginusers = async (req,res)=>{
+    
+}

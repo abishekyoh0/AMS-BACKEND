@@ -6,11 +6,8 @@ import familyRoutes from "../routes/residents/family.js"
 import residentRoutes from "../routes/residents/resident.js"
 import userRoutes from "../routes/UserManagement/usersRoute.js";
 import roleRoutes from "../routes/UserManagement/role.route.js";
-import { adminLogin } from "../controllers/usermanagement/admincontroll.js";
-import flatRoutes from "../routes/apartmentmanagement/flat.js";
-import residentRoutes from "../routes/residents/resident.js"
-import familyRoutes from "../routes/residents/family.js"
 import tenantRoutes from "../routes/apartmentmanagement/tenants.js"
+import { adminLogin } from "../controllers/usermanagement/admincontroll.js";
 
 
 const router = express.Router();

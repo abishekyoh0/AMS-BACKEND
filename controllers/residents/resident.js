@@ -8,7 +8,7 @@ export const createResident = async (req, res) => {
       return res.status(400).json({ success: false, message: error.details[0].message });
 
     const resident = await Resident.create(req.body);
-
+;
     res.status(201).json({ success: true, data: resident });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
@@ -92,17 +92,40 @@ export const registerResident = async (req, res) => {
 };
 
 export const approveResident = async (req, res) => {
-  const resident = await Resident.findByIdAndUpdate(
-    req.params.id,
-    {
-      status: "Approved",
-      isActive: true
-    },
-    { returnDocument: "after" }
-  );
 
-  res.json({ success: true, data: resident });
+  const resident = await Resident.findById(req.params.id);
+
+  if (!resident)
+    return res.status(404).json({ message: "Resident not found" });
+  resident.status = "Approved";
+  resident.isActive = true;
+  resident.isVerified = true;
+
+  await resident.save();
+  res.json({
+    success: true,
+    message: "Resident approved successfully",
+    data: resident
+  });
 };
 
 
+export const rejectResident = async (req, res) => {
 
+  const { reason } = req.body;
+
+  const resident = await Resident.findById(req.params.id);
+
+  if (!resident)
+    return res.status(404).json({ message: "Resident not found" });
+
+  resident.status = "Rejected";
+  resident.rejection_reason = reason;
+  resident.isActive = false;
+
+  await resident.save();
+  res.json({
+    success: true,
+    message: "Resident rejected"
+  });
+};
